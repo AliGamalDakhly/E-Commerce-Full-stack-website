@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Bussiness_Logic_Layer/1.0.0": {
+        "runtime": {
+          "Bussiness_Logic_Layer.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Bussiness_Logic_Layer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

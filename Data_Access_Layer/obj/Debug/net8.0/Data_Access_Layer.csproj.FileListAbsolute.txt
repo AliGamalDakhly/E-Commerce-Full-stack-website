@@ -1,0 +1,15 @@
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\bin\Debug\net8.0\Data_Access_Layer.deps.json
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\bin\Debug\net8.0\Data_Access_Layer.runtimeconfig.json
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\bin\Debug\net8.0\Data_Access_Layer.dll
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\bin\Debug\net8.0\Data_Access_Layer.pdb
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.csproj.AssemblyReference.cache
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.GeneratedMSBuildEditorConfig.editorconfig
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.AssemblyInfoInputs.cache
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.AssemblyInfo.cs
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.csproj.CoreCompileInputs.cache
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.sourcelink.json
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.dll
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\refint\Data_Access_Layer.dll
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.pdb
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\Data_Access_Layer.genruntimeconfig.cache
+I:\000- Projects\E-Commerce-Full-stack\ECommerce\Data_Access_Layer\obj\Debug\net8.0\ref\Data_Access_Layer.dll
