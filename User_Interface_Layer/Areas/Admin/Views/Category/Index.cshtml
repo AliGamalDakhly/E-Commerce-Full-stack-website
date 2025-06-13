@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewBag.PageTitle = "Category Management";
+    ViewBag.CardTitle = "Categories List";
+    Layout = "~/Views/Shared/_AdminDashboard.cshtml";
+}
+
+<div>
+    <a asp-action="Create" asp-controller="Category" class="btn-success btn">
+        Create
+    </a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(c => c.Name)</th>
+            <th>@Html.DisplayNameFor(c => c.Description)</th>
+            <th>@Html.DisplayNameFor(c => c.CreateDate)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>@category.CreateDate</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Category" asp-route-Id="@category.Id"
+                       class="btn btn-sm btn-outline-primary me-2">
+                       Edit
+                   </a>
+                    <a asp-action="Delete" asp-controller="Category" asp-route-Id="@category.Id"
+                       class="btn btn-sm btn-outline-danger me-2">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
