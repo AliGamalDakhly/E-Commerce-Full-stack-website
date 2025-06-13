@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/Data_Access_Layer/obj/Debug/net8.0/Data_Access_Layer.AssemblyInfo.cs
+/Data_Access_Layer/obj/Debug/net8.0/Data_Access_Layer.AssemblyInfoInputs.cache
+/Bussiness_Logic_Layer/obj/Debug/net8.0/Bussiness_Logic_Layer.AssemblyInfo.cs
+/Bussiness_Logic_Layer/obj/Debug/net8.0/Bussiness_Logic_Layer.AssemblyInfoInputs.cache
