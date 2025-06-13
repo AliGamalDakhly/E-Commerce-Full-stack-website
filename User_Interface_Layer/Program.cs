@@ -1,4 +1,8 @@
+using Bussiness_Logic_Layer.IServices;
+using Bussiness_Logic_Layer.Services;
 using Data_Access_Layer.Data.Context;
+using Data_Access_Layer.Repository.GenericRepository;
+using Data_Access_Layer.Repository.IGenericRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace User_Interface_Layer
@@ -15,6 +19,9 @@ namespace User_Interface_Layer
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("EcommerceDb")
                 ));
+            builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
             var app = builder.Build();
 
@@ -35,7 +42,7 @@ namespace User_Interface_Layer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area=Admin}/{controller=Category}/{action=Index}/{id?}");
 
             app.Run();
         }
