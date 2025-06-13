@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.vs/ECommerce_FullStack/v17/.wsuo
+/Bussiness_Logic_Layer/obj/Debug/net8.0/Bussiness_Logic_Layer.csproj.AssemblyReference.cache
+/User_Interface_Layer/obj/Debug/net8.0/User_Interface_Layer.AssemblyInfo.cs
+/User_Interface_Layer/obj/Debug/net8.0/User_Interface_Layer.AssemblyInfoInputs.cache
+/User_Interface_Layer/obj/Debug/net8.0/User_Interface_Layer.csproj.AssemblyReference.cache
