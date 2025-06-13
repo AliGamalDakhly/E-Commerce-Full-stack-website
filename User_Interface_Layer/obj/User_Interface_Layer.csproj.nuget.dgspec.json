@@ -31,7 +31,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "I:\\000- Projects\\ECommerce_FullStack\\Data_Access_Layer\\Data_Access_Layer.csproj": {
+                "projectPath": "I:\\000- Projects\\ECommerce_FullStack\\Data_Access_Layer\\Data_Access_Layer.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
