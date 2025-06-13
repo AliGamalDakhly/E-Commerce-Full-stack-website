@@ -25,8 +25,11 @@ namespace Data_Access_Layer.Repository.GenericRepository
             return entity;
         }
 
-        public bool DeleteEntity(TKey id)
+        public bool DeleteEntity(TKey? id)
         {
+            if (id == null) 
+                return false;
+
             TEntity? entity = _dbContext.Set<TEntity>().Find(id);
             if (entity == null)
                 return false;
@@ -51,7 +54,7 @@ namespace Data_Access_Layer.Repository.GenericRepository
             return query.ToList();
         }
 
-        public TEntity GetById(TKey id)
+        public TEntity GetById(TKey? id)
         {
             TEntity? entity = null;
             if (id != null)

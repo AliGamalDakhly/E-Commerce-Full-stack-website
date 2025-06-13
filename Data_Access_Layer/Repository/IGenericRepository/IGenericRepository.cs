@@ -28,9 +28,9 @@ namespace Data_Access_Layer.Repository.IGenericRepository
         /// <param name="id"></param>
         /// <param name="includes"></param>
         /// <returns></returns>
-        TEntity GetById(TKey id);
+        TEntity GetById(TKey? id);
         TEntity AddEntity(TEntity entity);
         TEntity UpdateEntity(TEntity entity);
-        bool DeleteEntity(TKey id);
+        bool DeleteEntity(TKey? id);
     }
 }
