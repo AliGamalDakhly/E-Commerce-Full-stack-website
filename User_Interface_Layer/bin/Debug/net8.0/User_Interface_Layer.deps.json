@@ -1083,6 +1083,9 @@
         }
       },
       "Bussiness_Logic_Layer/1.0.0": {
+        "dependencies": {
+          "Data_Access_Layer": "1.0.0"
+        },
         "runtime": {
           "Bussiness_Logic_Layer.dll": {
             "assemblyVersion": "1.0.0.0",

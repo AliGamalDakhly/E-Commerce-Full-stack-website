@@ -1,4 +1,5 @@
-﻿using Data_Access_Layer.Data.Context;
+﻿using Bussiness_Logic_Layer.IServices;
+using Data_Access_Layer.Data.Context;
 using Data_Access_Layer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,16 +7,17 @@ namespace User_Interface_Layer.Controllers
 {
     public class CategoryController : Controller
     {
-        ApplicationDbContext dbContext;
-        public CategoryController(ApplicationDbContext _dbContext)
+        ICategoryService _categoryService;
+
+        public CategoryController(ICategoryService categoryService)
         {
-            dbContext = _dbContext;
+            _categoryService = categoryService;
         }
 
 
         public IActionResult Index()
         {
-            return View(dbContext.Categories.ToList());
+            return View(_categoryService.GetAll());
         }
 
 
@@ -34,8 +36,7 @@ namespace User_Interface_Layer.Controllers
 
             if (ModelState.IsValid)
             {
-                dbContext.Categories.Add(category);
-                dbContext.SaveChanges();
+                _categoryService.AddCategory(category);
                 return RedirectToAction("Index");
             }
 
@@ -51,7 +52,7 @@ namespace User_Interface_Layer.Controllers
             if(Id == null || Id == 0)
                 NotFound();
 
-            Category? category = dbContext.Categories.Find(Id);
+            Category? category = _categoryService.GetCategoryById(Id);
 
             if (category == null)
                 NotFound();
@@ -67,8 +68,7 @@ namespace User_Interface_Layer.Controllers
 
             if (ModelState.IsValid)
             {
-                dbContext.Categories.Update(category);
-                dbContext.SaveChanges();
+                _categoryService.UpdateCategory(category);
                 return RedirectToAction("Index");
             }
 
@@ -83,13 +83,7 @@ namespace User_Interface_Layer.Controllers
             if(id == null || id == 0)
                 NotFound();
 
-            Category? category = dbContext.Categories.Find(id);
-
-            if (category == null)
-                NotFound();
-
-            dbContext.Categories.Remove(category);
-            dbContext.SaveChanges();
+            _categoryService.DeleteCategory(id);
 
             return RedirectToAction("Index");
         }
