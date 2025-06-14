@@ -45,11 +45,11 @@ namespace Data_Access_Layer.Repository.GenericRepository
 
             foreach(var _include in includes)
             {
-                query.Include(_include);
+                query =  query.Include(_include);
             }
 
             if(filter != null)
-                query.Where(filter);
+                query =  query.Where(filter);
 
             return query.ToList();
         }
