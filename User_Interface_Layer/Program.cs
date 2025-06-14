@@ -13,15 +13,18 @@ namespace User_Interface_Layer
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("EcommerceDb")
                 ));
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             var app = builder.Build();
 
@@ -42,7 +45,7 @@ namespace User_Interface_Layer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Admin}/{controller=Category}/{action=Index}/{id?}");
+                pattern: "{area=Admin}/{controller=Product}/{action=Create}/{id?}");
 
             app.Run();
         }
