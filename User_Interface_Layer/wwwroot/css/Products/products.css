@@ -1,0 +1,13 @@
+﻿.product-img {
+    width: 80px; /* fixed width */
+    height: 80px; /* fixed height */
+    object-fit: contain; /* crop if necessary to fill the box */
+}
+
+th,
+td {
+    padding: $table-cell-padding;
+    vertical-align: middle !important;
+    border-top: $table-border-width solid $table-border-color;
+}
+
