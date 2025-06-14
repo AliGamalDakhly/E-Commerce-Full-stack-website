@@ -409,3 +409,4 @@ FodyWeavers.xsd
 /User_Interface_Layer/User_Interface_Layer.csproj
 /User_Interface_Layer/User_Interface_Layer.csproj.user
 /Bussiness_Logic_Layer/obj/Debug/net8.0/Bussiness_Logic_Layer.csproj.CoreCompileInputs.cache
+/Data_Access_Layer/obj/Debug/net8.0/Data_Access_Layer.csproj.CoreCompileInputs.cache

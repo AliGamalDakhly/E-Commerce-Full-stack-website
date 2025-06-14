@@ -16,10 +16,16 @@ namespace Data_Access_Layer.Entities
         [MinLength(3)]
         public string Name { get; set; }
         public string? Description { get; set; }
+
+        [Display(Name = "Product Image")]
+        public string? Img {  get; set; }
+        public decimal Price {  get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        
-        public int CategoryId;
+
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+
         public virtual Category Category { get; set; }
     }
 }
