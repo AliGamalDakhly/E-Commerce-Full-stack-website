@@ -1,6 +1,7 @@
 using Bussiness_Logic_Layer.IServices;
 using Bussiness_Logic_Layer.Services;
 using Data_Access_Layer.Data.Context;
+using Data_Access_Layer.Entities;
 using Data_Access_Layer.Repository.GenericRepository;
 using Data_Access_Layer.Repository.IGenericRepository;
 using Microsoft.AspNetCore.Identity;
@@ -20,9 +21,16 @@ namespace ECommerce_Website
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
 
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -46,12 +54,13 @@ namespace ECommerce_Website
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Admin}/{controller=Product}/{action=Create}/{id?}");
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();

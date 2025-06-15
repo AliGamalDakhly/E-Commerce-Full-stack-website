@@ -27,6 +27,7 @@ namespace Data_Access_Layer.Data.Context
 
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<AppUser>  AppUsers { get; set; }
 
     }
 }
