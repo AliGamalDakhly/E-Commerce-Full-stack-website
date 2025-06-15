@@ -3,9 +3,10 @@ using Bussiness_Logic_Layer.Services;
 using Data_Access_Layer.Data.Context;
 using Data_Access_Layer.Repository.GenericRepository;
 using Data_Access_Layer.Repository.IGenericRepository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace User_Interface_Layer
+namespace ECommerce_Website
 {
     public class Program
     {
@@ -13,15 +14,16 @@ namespace User_Interface_Layer
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
-
             // Add services to the container.
-            builder.Services.AddControllersWithViews()
-    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("EcommerceDb")
-                ));
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddControllersWithViews();
+
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
@@ -29,7 +31,11 @@ namespace User_Interface_Layer
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseMigrationsEndPoint();
+            }
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -46,6 +52,7 @@ namespace User_Interface_Layer
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area=Admin}/{controller=Product}/{action=Create}/{id?}");
+            app.MapRazorPages();
 
             app.Run();
         }
