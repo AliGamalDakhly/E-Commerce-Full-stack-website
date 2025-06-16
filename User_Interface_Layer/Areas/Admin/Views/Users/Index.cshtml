@@ -41,7 +41,7 @@
 
 
 <div>
-    <a asp-action="Create" asp-controller="Product" class="btn-success btn">
+    <a asp-action="Create" asp-controller="Users" class="btn-success btn">
         Create
     </a>
 </div>
@@ -69,10 +69,21 @@
                 <td>@product.CreatedDate</td>
                 <td><img src="@product.Img" class="img-thumbnail product-img" /></td> *@
                 <td>
-                    <a asp-action="Edit" asp-controller="Users" asp-route-Id="@user.Id"
-                       class="btn btn-sm btn-outline-primary me-2">
-                        Edit
-                    </a>
+                    @if(user.LockoutEnd == null || user.LockoutEnd < DateTime.UtcNow)
+                    {
+                        <a asp-action="LockUnLock" asp-controller="Users" asp-route-Id="@user.Id"
+                        class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-lock-open"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="LockUnLock" asp-controller="Users" asp-route-Id="@user.Id"
+                           class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-lock"></i>
+                        </a>
+                    }
+
                     <a asp-action="Delete" asp-controller="Users" asp-route-Id="@user.Id"
                        class="btn btn-sm btn-outline-danger me-2">
                         Delete
