@@ -28,6 +28,8 @@ namespace Data_Access_Layer.Data.Context
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<AppUser>  AppUsers { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
 
     }
 }

@@ -25,7 +25,9 @@ namespace Data_Access_Layer.Entities
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-
         public virtual Category Category { get; set; }
+
+
+        public virtual List<OrderItem> OrderItems { get; set; }
     }
 }
