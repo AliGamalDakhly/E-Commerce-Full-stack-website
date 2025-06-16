@@ -58,24 +58,20 @@ namespace Bussiness_Logic_Layer.Services
         }
 
         #region Update Shopping Cart
-        //public ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart)
-        //{
-        //    if (shoppingCart == null)
-        //        throw new ArgumentNullException(nameof(shoppingCart));
+        public ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart)
+        {
+            if (shoppingCart == null)
+                throw new ArgumentNullException(nameof(shoppingCart));
 
-        //    ShoppingCart? dbShoppingCart = _shoppingCartRepository.GetById(shoppingCart.Id);
-        //    if (dbShoppingCart == null)
-        //        throw new KeyNotFoundException($"ShoppingCart With ID: {shoppingCart.Id} Not Found to Be Updated");
+            ShoppingCart? dbShoppingCart = _shoppingCartRepository.GetById(shoppingCart.Id);
+            if (dbShoppingCart == null)
+                throw new KeyNotFoundException($"ShoppingCart With ID: {shoppingCart.Id} Not Found to Be Updated");
 
-        //    dbShoppingCart.Name = shoppingCart.Name;
-        //    dbShoppingCart.Description = shoppingCart.Description;
-        //    dbShoppingCart.Price = shoppingCart.Price;
-        //    dbShoppingCart.Img = shoppingCart.Img;
-        //    dbShoppingCart.CategoryId = shoppingCart.CategoryId;
+            dbShoppingCart.OrderItems = shoppingCart.OrderItems;
 
-        //    var updatedShoppingCart = _shoppingCartRepository.UpdateEntity(dbShoppingCart);
-        //    return updatedShoppingCart;
-        //}
+            var updatedShoppingCart = _shoppingCartRepository.UpdateEntity(dbShoppingCart);
+            return updatedShoppingCart;
+        }
         #endregion
 
 

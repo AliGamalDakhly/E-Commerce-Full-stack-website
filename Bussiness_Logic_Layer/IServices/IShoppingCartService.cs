@@ -12,8 +12,9 @@ namespace Bussiness_Logic_Layer.IServices
     {
         IEnumerable<ShoppingCart> GetAll(Expression<Func<ShoppingCart, bool>>? filter = null, params Expression<Func<ShoppingCart, object>>[] includes);
         ShoppingCart AddShoppingCart(ShoppingCart shoppingCart);
-        //ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart);
+        ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart);
         bool DeleteShoppingCart(int? id);
         ShoppingCart GetShoppingCartById(int? id);
+        ShoppingCart GetShoppingCartByUserId(string? id);
     }
 }
