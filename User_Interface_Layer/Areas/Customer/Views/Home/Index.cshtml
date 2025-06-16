@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Product>
 @{
+    ViewBag.CartTotalCount = ViewBag.CartTotalProductCount;
     Layout = "~/Views/Shared/_CustomerHome.cshtml";
 }
 
@@ -48,7 +49,11 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto" asp-action="AddToCart" asp-controller="Home" asp-route-Id="@product.Id">
+                                    Add to cart
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

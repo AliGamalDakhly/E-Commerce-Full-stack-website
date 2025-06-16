@@ -4,6 +4,7 @@
 }
 
 <!-- Product section-->
+<form method="post">
 <section class="py-2">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -19,8 +20,9 @@
                 </div>
                 <p class="lead">@Model.Description</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <input asp-for="@Model.Id" value="@Model.Id" hidden />
+                        <input class="form-control text-center me-3" name="quantity" id="ProductQuantity" type="number" value="@ViewBag.ProductCount" style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
@@ -29,6 +31,7 @@
         </div>
     </div>
 </section>
+</form>
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
