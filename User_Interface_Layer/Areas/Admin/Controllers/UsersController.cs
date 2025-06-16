@@ -1,4 +1,7 @@
-﻿using Data_Access_Layer.Entities;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Data_Access_Layer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +11,7 @@ using User_Interface_Layer.ViewModels;
 namespace User_Interface_Layer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Manager")]
     public class UsersController : Controller
     {
         private UserManager<AppUser> _userManager;
@@ -72,6 +76,43 @@ namespace User_Interface_Layer.Areas.Admin.Controllers
             }
 
             return View(appUser);
+        }
+
+
+        public async Task<IActionResult> LockUnLock(string? Id)
+        {
+            if (Id == null)
+                NotFound();
+
+            AppUser? appUser = await _userManager.FindByIdAsync(Id);
+
+            if (appUser == null)
+                NotFound();
+
+            bool isLocked  = await _userManager.IsLockedOutAsync(appUser);
+
+            if(isLocked)
+                await _userManager.SetLockoutEndDateAsync(appUser, DateTime.UtcNow);
+            else
+                await _userManager.SetLockoutEndDateAsync(appUser, DateTime.UtcNow.AddDays(2));
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(string? Id)
+        {
+            if(Id == null)
+                NotFound();
+
+            AppUser? appUser = await _userManager.FindByIdAsync(Id);
+
+            if (appUser == null)
+                NotFound();
+
+
+            var result =  await _userManager.DeleteAsync(appUser);
+
+            return RedirectToAction("Index");
         }
 
 
