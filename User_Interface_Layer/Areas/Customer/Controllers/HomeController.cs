@@ -59,6 +59,8 @@ namespace User_Interface_Layer.Areas.Customer.Controllers
                 NotFound();
 
             int? quantity = 0;
+            int? totalQuantity = 0;
+
             string? userId = _userManager.GetUserId(User);
             if (userId != null)
             {
@@ -67,12 +69,17 @@ namespace User_Interface_Layer.Areas.Customer.Controllers
                 .FirstOrDefault();
 
                 if (cart != null)
+                {
                     quantity = cart.OrderItems?.Where(o => o.ProductId == Id)
                         .FirstOrDefault()?.Quantity ?? 0;
+
+                    totalQuantity = cart.OrderItems?.Sum(o => o.Quantity);
+                }
+                    
             }
 
             ViewBag.ProductCount = quantity;
-
+            ViewBag.CartTotalProductCount = totalQuantity;
             return View(product);
         }
 
@@ -80,6 +87,8 @@ namespace User_Interface_Layer.Areas.Customer.Controllers
         [Authorize]
         public IActionResult Details(int? Id, int quantity)
         {
+            int? totalQuantity = 0;
+
             if (Id == null)
                 NotFound();
 
@@ -94,6 +103,8 @@ namespace User_Interface_Layer.Areas.Customer.Controllers
 
             if (cart == null)
                 NotFound();
+
+            
 
             OrderItem? order = cart?.OrderItems.FirstOrDefault(o => o.ProductId == product.Id);
             if (order == null)
@@ -111,7 +122,11 @@ namespace User_Interface_Layer.Areas.Customer.Controllers
                 order.Quantity = quantity;
                 _shoppingCartService.UpdateShoppingCart(cart);
             }
+
+            totalQuantity = cart.OrderItems?.Sum(o => o.Quantity);
+
             ViewBag.ProductCount = quantity;
+            ViewBag.CartTotalProductCount = totalQuantity;
             return View(product);
         }
 

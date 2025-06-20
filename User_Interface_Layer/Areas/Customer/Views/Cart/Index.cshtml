@@ -1,0 +1,88 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    Layout = "~/Views/Shared/_CustomerHome.cshtml";
+}
+
+@section CssLink {
+    <link href="~/css/ShoppingCart/cart.css" rel="stylesheet" />
+}
+
+<section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+
+                <div class="table-responsive mb-4">
+                    <table class="table align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="h5">Product</th>
+                                <th scope="col" class="text-center">Unit Price</th>
+                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col" class="text-center">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
+                            {
+                                <tr class="border-bottom">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="@order.Product.Img" alt="Book" class="img-fluid rounded" style="width: 100px; height: 150px; object-fit: contain;">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">@order.Product.Name</p>
+                                                <p class="text-muted mb-0" style="font-size: 0.9rem;">@order.Product.Description</p>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <p class="fw-semibold mb-0">$@order.Product.Price</p>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a class="btn btn-sm btn-outline-secondary me-2" asp-action="decrement" asp-route-id="@order.Id" asp-controller="Cart">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
+
+                                            <input type="number" min="0" name="quantity" value="@order.Quantity" readonly
+                                                   class="form-control form-control-sm text-center" style="width: 50px;" />
+
+                                            <a class="btn btn-sm btn-outline-secondary ms-2" asp-action="increment" asp-route-id="@order.Id" asp-controller="Cart">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <p class="fw-semibold mb-0">$@(order.Quantity * order.Product.Price)</p>
+                                    </td>
+                                </tr>
+                            }
+                        
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="card shadow-sm p-4 mb-4" style="border-radius: 16px;">
+                    <div class="d-flex justify-content-between align-items-center mb-3" style="font-weight: 600; font-size: 1.2rem;">
+                        <span>Subtotal:</span>
+                        <span>$@ViewBag.totalPrice</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="index" asp-controller="home" class="btn btn-outline-primary">
+                            Continue Shopping
+                        </a>
+                        <a asp-action="CheckOut" asp-controller="cart" class="btn btn-primary">
+                            Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
