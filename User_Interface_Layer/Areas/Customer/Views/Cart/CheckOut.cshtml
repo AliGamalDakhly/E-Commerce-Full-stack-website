@@ -1,0 +1,214 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    Layout = "~/Views/Shared/_CustomerHome.cshtml";
+}
+
+@section CssLink {
+    <link href="~/css/checkout/checkout.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <form method="post" asp-action="Checkout" asp-controller="Order">
+
+        <div class="row">
+            <!-- LEFT SIDE: Billing & Payment -->
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <ol class="activity-checkout mb-0 px-4 mt-3">
+                            <!-- Billing Info -->
+                            <li class="checkout-item">
+                                <div class="feed-item-list">
+                                    <h5 class="font-size-16 mb-1">Billing Info</h5>
+                                    <p class="text-muted text-truncate mb-4">Enter your billing details below</p>
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="billing-name">Name</label>
+                                                <input type="text" name="Name" value="@ViewBag.CurrentUser.Name" class="form-control" id="billing-name" placeholder="Enter name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="billing-email">Email</label>
+                                                <input type="email" name="Email" value="@ViewBag.CurrentUser.Email" class="form-control" id="billing-email" placeholder="Enter email">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="billing-phone">Phone</label>
+                                                <input type="text" name="Phone" value="@ViewBag.CurrentUser.PhoneNumber" class="form-control" id="billing-phone" placeholder="Enter phone number">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="billing-address">Address</label>
+                                        <textarea class="form-control" name="Address" id="billing-address" rows="3" placeholder="Enter full address">@ViewBag.CurrentUser.Address</textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="billing-city">City</label>
+                                                <input type="text" name="City" class="form-control" id="billing-city" placeholder="Enter City">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="zip-code">Zip / Postal code</label>
+                                                <input type="text" name="ZipCode" class="form-control" id="zip-code" placeholder="Enter Postal code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Payment Info -->
+                            <li class="checkout-item">
+                                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                                    <div class="card-body p-4">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
+                                                <!-- Payment Method Radio Buttons -->
+                                                <div class="d-flex flex-row pb-3">
+                                                    <div class="d-flex align-items-center pe-2">
+                                                        <input class="form-check-input" type="radio" name="PaymentMethod" value="CreditCard" checked />
+                                                    </div>
+                                                    <div class="rounded border w-100 p-3">
+                                                        <p class="mb-0">
+                                                            <i class="fab fa-cc-mastercard fa-2x text-body pe-2"></i>Credit Card
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-row pb-3">
+                                                    <div class="d-flex align-items-center pe-2">
+                                                        <input class="form-check-input" type="radio" name="PaymentMethod" value="DebitCard" />
+                                                    </div>
+                                                    <div class="rounded border w-100 p-3">
+                                                        <p class="mb-0">
+                                                            <i class="fab fa-cc-visa fa-2x text-body pe-2"></i>Debit Card
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-row">
+                                                    <div class="d-flex align-items-center pe-2">
+                                                        <input class="form-check-input" type="radio" name="PaymentMethod" value="PayPal" />
+                                                    </div>
+                                                    <div class="rounded border w-100 p-3">
+                                                        <p class="mb-0">
+                                                            <i class="fab fa-cc-paypal fa-2x text-body pe-2"></i>PayPal
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card Details -->
+                                            <div class="col-md-6 col-lg-4 col-xl-6">
+                                                <div class="row">
+                                                    <div class="col-12 col-xl-6">
+                                                        <div class="mb-4 mb-xl-5">
+                                                            <input type="text" name="CardName" class="form-control form-control-lg" placeholder="John Smith" />
+                                                            <label class="form-label">Name on card</label>
+                                                        </div>
+                                                        <div class="mb-4 mb-xl-5">
+                                                            <input type="text" name="Expiration" class="form-control form-control-lg" placeholder="MM/YY" minlength="5" maxlength="5" />
+                                                            <label class="form-label">Expiration</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-xl-6">
+                                                        <div class="mb-4 mb-xl-5">
+                                                            <input type="text" name="CardNumber" class="form-control form-control-lg" placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" />
+                                                            <label class="form-label">Card Number</label>
+                                                        </div>
+                                                        <div class="mb-4 mb-xl-5">
+                                                            <input type="password" name="CVV" class="form-control form-control-lg" placeholder="•••" minlength="3" maxlength="3" />
+                                                            <label class="form-label">CVV</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- End Row -->
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row my-4">
+                    <div class="col">
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary">Continue Shopping</a>
+                    </div>
+                    <div class="col">
+                        <div class="text-end mt-2 mt-sm-0">
+                            <button type="submit" class="btn btn-success">
+                                <i class="mdi mdi-cart-outline me-1"></i> Proceed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: Order Summary -->
+            <div class="col-xl-4">
+                <div class="card checkout-order-summary">
+                    <div class="card-body">
+                        <div class="p-3 bg-light mb-3">
+                            <h5 class="font-size-16 mb-0">
+                                Order Summary
+                                <span class="float-end ms-2">#MN0124</span>
+                            </h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-centered mb-0 table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 110px;">Product</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="@order.Product.Img" alt="product-img" class="img-fluid rounded" style="width: 50px; height: 75px; object-fit: contain;">
+                                            </td>
+                                            <td>
+                                                <h5 class="font-size-16 text-truncate">
+                                                    <a href="#" class="text-dark">@order.Product.Name</a>
+                                                </h5>
+                                                <p class="text-muted mb-0 mt-1">$ @order.Product.Price x @order.Quantity</p>
+                                            </td>
+                                            <td>$ @(order.Product.Price * order.Quantity)</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td colspan="2">Sub Total :</td>
+                                        <td>$ @ViewBag.totalPrice</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Shipping Charge :</td>
+                                        <td>$ 25</td>
+                                    </tr>
+                                    <tr class="bg-light">
+                                        <td colspan="2"><strong>Total:</strong></td>
+                                        <td>$ @(ViewBag.totalPrice + 25)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Order Summary -->
+
+        </div> <!-- End Row -->
+    </form>
+</div>
